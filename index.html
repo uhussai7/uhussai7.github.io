@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css" id="highlight-theme">
+		<title>DMRIGCNNS</title>
+
+		<script src="plugin/math/math.js"></script>
+		<script>
+			Reveal.initialize({
+				math: {
+				mathjax: 'https://cdn.jsdelivr.net/gh/mathjax/mathjax@2.7.8/MathJax.js',
+				config: 'TeX-AMS_HTML-full',
+				// pass other options into `MathJax.Hub.Config()`
+				TeX: { Macros: { RR: "{\\bf R}" } }
+				},
+				plugins: [ RevealMath ]
+			});
+		</script>
+
+		<style>
+			.container{
+				display: flex;
+				justify-content: center;
+				align-items: top;
+			}
+			.col{
+				flex: 1;
+			}
+
+			.reveal section p {
+    			font-size: 0.7em;
+				text-align: left;
+			}
+
+			.pink {
+				color: rgb(144, 0, 255)
+			}
+
+			.green {
+				color: rgb(3, 180, 0)
+			}
+
+		</style>
+	</head>
+	
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				
+				<section data-background-color="rgb(2,46,4)" data-transition="convex-out">
+					<h2 style="position:relative; top : 1em;" id="title">Gauge equivariant convolutional neural networks for diffusion mri</h2>
+					<!--<p>By<p>-->
+					<p style="position:relative; top : 3em; text-align: center;">Uzair<p>
+				</section>
+				
+				<section data-transition="fade " data-background-color="rgb(14,34,64)">
+					<h4 id="title">Convolutional neural nets (CNNs)</h4>
+					<div class="container">
+						<div class="col" >
+							<img src="https://mlnotebook.github.io/img/CNN/convSobel.gif"> 
+						</div>
+						<div class="col" style="width: 6000px;">
+							<p class="fragment fade-up"> CNNs use weight sharing amongst translations.</p>
+							<p class="fragment fade-up"> Same filter is used in each “stride” or translation.</p>
+							<p class="fragment fade-up"> The reason this works is because the same features can appear at any location in an image.</p>
+							<p class="fragment fade-up"> But features can also appear in different orientations (rotations)...</p>
+						</div>
+					</div>
+				</section>
+				
+				<section data-background="linear-gradient(rgba(1, 0, 0, 0.65), rgba(0, 0, 0, 0.65))" data-transition="convex-in">
+					<h4>Group theory
+					<img style="width: 
+					1.0em;" src="https://community.thunkable.com/uploads/default/original/3X/6/1/61d85f670d4d9221745b7a844ebd595bfa150eb6.gif"></h4>
+					<p class="fragment"><span class="pink">Group theory</span> is important in CNNs</p>
+					<p class="fragment">When we are doing convolutions and sliding our kernel across the image, we are taking <span class="pink"> convolutions under the translation group</span> </p>
+					<img class="fragment" src="https://latex.codecogs.com/svg.latex?%5CLARGE%20%7B%5Ccolor%7BWhite%7D%20%5Cleft%28%20f%20*%20g%20%5Cright%29%20%28x%29%20%3D%20%5Cint%20f%28t%29g%28t-%5Ctau%29dt%20%7D">
+					<p class="fragment">But we can <span class="pink"> take convolutions under any group </span> </p>
+					<img class="fragment" src="https://latex.codecogs.com/svg.latex?%5CLARGE%20%7B%5Ccolor%7BWhite%7D%20%5Cleft%28%20p%20%5Cstar%20q%20%5Cright%29%20%28g%29%20%3D%20%5Cint_g%20p%28h%29q%28h%5E%7B-1%7Dg%29d%5Clambda%28g%29%20%7D">
+				</section>
+
+				<section data-background-color="rgb(64,0,58)">
+					<h4 center="true">Gauge equivariance</h4>
+					<p style="text-align: center; position:relative:top:10px;">If a feature in an image is translated then the result of the convolution of the image with a filter is also translated</p>
+					<img class="fragment" src="https://latex.codecogs.com/svg.latex?%5Chuge%20%7B%5Ccolor%7BWhite%7D%5Cbegin%7Balign*%7D%20%28T_a%28f%29%20*%20g%29%20%28%5Ctau%29%20%26%3D%20%5Cint%20f%28t-a%29g%28t-%5Ctau%29%20dt%20%5C%5C%20%26%3D%20%5Cint%20f%28%5Ctilde%7Bt%7D%29g%28%5Ctilde%7Bt%7D-%28%5Ctau-a%29%29%20d%5Ctilde%7Bt%7D%20%5C%5C%20%26%3D%20T_a%28f%20*%20g%29%20%5Cend%7Balign*%7D%7D">
+					<p class="fragment" style="text-align: center; class="fragment">This applies to convolutions over other groups also.</p>
+				</section>
+
+				<section data-background-color="rgb(35, 54, 100)">
+					<h4 id="title">Diffusion data</h4>
+					<div class="container">
+						<div class="col">
+							<p class="fragment fade-up"> Diffusion data is defined on a hemisphere</p>
+							<p class="fragment fade-up"> So we use an icosahedron representation of the data, 5 charts and appropriate padding to convert to a 2d image</p>
+						</div>
+						<div class="col" >
+							<img  class= "fragment" src="https://i.imgur.com/NdayQrH.png"> 
+						</div>
+					</div>
+					<div class="container">
+						<div class="col">
+							<p style="font-size: 0.9em; text-align: center;" class="fragment"> <span class="green">Convolutions are done with a hexagonal filter and the group is the dihedral group.</span> </p>
+							<p style="font-size: 0.9em; text-align: center;" class="fragment"> <span class="green">This gives us a gauge equivariant network</span> </p>
+						</div>
+						<div class="col" >
+							<img style="width: 8em;" class="fragment" src="https://amininima.files.wordpress.com/2013/07/necklacegif3.gif?w=601&zoom=2">
+						</div>
+					</div>
+				</section>
+
+				<section data-background-color="rgb(140, 193, 222)">
+					<h4 id="title">Application to DTI</h4>
+					<div class="container">
+						<div class="fragment">
+							<p style="font-size: 0.35em;"> | gConv (16x7 weights) | group batch norm | gConv(8x7 weights) | group batch norm | orientation pool | max pool | fully connected | </p>
+							<p style="font-size: 0.35em;"> Training samples: 25000, Test samples: 2500</p>
+							<img style="width: 4em;" src="https://i.imgur.com/Fy4aISU.png">
+						</div>
+						<div class="fragment" style="margin-left: 3em;">
+							<p style="font-size: 0.35em;"> gConv (8x7 weights) | group batch norm | gConv(16x7 weights) | group batch norm | gConv(32x7 weights) | group batch norm | orientation pool | fully connected |. </p>
+							<p style="font-size: 0.35em;"> The loss function is the abs(1-cos(theta)) where theta is angle between predicted and true. Training samples = 10000 and test samples = 2500.</p>
+							<p style="font-size: 0.35em;"> Training samples: 10000, Test samples: 2500</p>
+							<img style="width: 15em;" src="https://i.imgur.com/0TkNCqC.png">		
+						</div>
+
+					</div>
+
+
+					
+				</section>
+
+
+		
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
+
+
+
