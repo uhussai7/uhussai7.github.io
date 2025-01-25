@@ -1,0 +1,10 @@
+.columns {
+    display: flex;
+    gap: 1rem; /* Add spacing between columns */
+}
+
+.column {
+    flex: .33; /* Distribute space equally */
+    padding: 0.5rem; /* Add padding inside columns */
+    box-sizing: border-box;
+}

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<head>
+    ...
+    {{ if .Param "math" }}
+      {{ partialCached "math.html" . }}
+    {{ end }}
+    ...
+  </head>
+<html lang="{{ .Site.LanguageCode }}">
+    {{- partial "head.html" . -}}
+    {{ $css := resources.Get "css/style.css" | resources.Minify | resources.Fingerprint }}
+    <link rel="stylesheet" href="{{ $css.Permalink }}" integrity="{{ $css.Data.Integrity }}">
+    <body data-theme = "{{ .Site.Params.defaultColor }}" class="notransition">
+        {{- partial "scriptsBodyStart.html" . -}}
+        {{- partial "header.html" . -}}
+        {{- block "main" . }}{{- end }}
+        {{- partial "footer.html" . -}}
+        {{- partial "scriptsBodyEnd.html" . -}}
+    </body>
+</html>
+

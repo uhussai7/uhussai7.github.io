@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Uzair Hussain</title><link>https://uhussai7.github.io/</link><description>Recent content on Uzair Hussain</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 23 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://uhussai7.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Simple Linear Regression</title><link>https://uhussai7.github.io/posts/linear_regression/</link><pubDate>Thu, 23 Jan 2025 00:00:00 +0000</pubDate><guid>https://uhussai7.github.io/posts/linear_regression/</guid><description>&lt;p>Although a straightforward procedure, simple linear regression captures some key ideas about model fitting. Let&amp;rsquo;s consider $ x \in \mathbb{R} \rightarrow y \in \mathbb{R} $
+and one is given pairwise data $(y_i,x_i)$. The relationship we assume between $x$ and $y$ is a linear one, yielding a simple model,&lt;/p>
+$$
+\begin{equation}
+y=w_0 + w_1 x,
+\label{eq:lin}
+\end{equation}
+$$&lt;p>where the $w_i \in \mathbb{R}$. Geometrically, we are assuming that scaling an $x$ by $w_1$ and then translating by $w_0$ gets you a $y$. At the risk of being pedantic, one can also express \eqref{eq:lin} as,&lt;/p></description></item><item><title/><link>https://uhussai7.github.io/resume/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://uhussai7.github.io/resume/</guid><description>&lt;h1 id="uzair-hussain">Uzair Hussain&lt;/h1>
+&lt;p>&amp;#x2709;&amp;#xfe0f; : &lt;a href="mailto:ughussain@gmail.com">ughussain@gmail.com&lt;/a>&lt;/p>
+&lt;hr>
+&lt;hr>
+&lt;hr>
+&lt;hr>
+&lt;h1 id="wave-about-me">&amp;#x1f44b; About me&lt;/h1>
+&lt;p>I am a researcher with a decade of experience in tackling complex problems ranging from advanced physics
+simulations to using AI to image the brain and predict its neuronal activity. My expertise, honed through a PhD
+in theoretical physics and work in medical imaging, neuroscience, and AI, spans a broad spectrum of skills. I am
+a fast-learner, creative, knowledgeable, and have a profound passion for uncovering insights from data.&lt;/p></description></item></channel></rss>

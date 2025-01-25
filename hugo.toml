@@ -1,0 +1,71 @@
+title = "Uzair Hussain"
+baseURL = "https://uhussai7.github.io/"
+languageCode = 'en-us'
+theme = "hugo-blog-awesome"
+
+# To enable Google Analytics 4 (gtag.js) provide G-MEASUREMENT_ID below.
+# To disable  Google Analytics, simply leave the field empty or remove the next line
+googleAnalytics = '' # G-MEASUREMENT_ID
+
+
+# Enable emojis globally
+enableEmoji = true
+
+#latex
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      [markup.goldmark.extensions.passthrough]
+        enable = true
+        [markup.goldmark.extensions.passthrough.delimiters]
+          block = [['\[', '\]'], ['$$', '$$']]
+          inline = [['\(', '\)']]
+
+[menu]
+  [[menu.main]] 
+    # The page reference (pageRef) is useful for menu highlighting
+    # When pageRef is set, setting `url` is optional; it will be used as a fallback if the page is not found.
+    pageRef="/"
+    name = 'Home'
+    url = '/'
+    weight = 10
+  [[menu.main]]
+    pageRef="resume"
+    name = 'Resume'
+    url = '/resume/'
+    weight = 20
+  [[menu.main]]
+    pageRef="posts"
+    name = 'Posts'
+    url = '/posts/'
+    weight = 30
+
+
+[params]
+  sitename = "Uzair Hussain"
+  defaultColor = "light" # set default color mode: dark or light
+  math = true
+  description = ""
+
+[params.author]
+  avatar = "avatar.jpg" # put the file in assets folder; also ensure that image has same height and width
+  # Note: image is not rendered if the resource(avatar image) is not found. No error is displayed.
+  intro = "Uzair Hussain, PhD"
+  name = "Uzair Hussain"
+  description = "Theoretical physicist turned AI explorer, chasing patterns in data, decoding brains with deep learning, and making AI more interpretable."
+
+[[params.socialIcons]]
+name = "github"
+url = "https://github.com/uhussai7"
+
+[[params.socialIcons]]
+name = "linkedin"
+url = "www.linkedin.com/in/uzair-hussain-453261211"
+
+[[params.socialIcons]]
+name = "email"
+url = "mailto:ughussain@gmail.com"
+
+[[params.avatar]]
+width = "25em" 
+

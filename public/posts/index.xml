@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Uzair Hussain</title><link>https://uhussai7.github.io/posts/</link><description>Recent content in Posts on Uzair Hussain</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 23 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://uhussai7.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Simple Linear Regression</title><link>https://uhussai7.github.io/posts/linear_regression/</link><pubDate>Thu, 23 Jan 2025 00:00:00 +0000</pubDate><guid>https://uhussai7.github.io/posts/linear_regression/</guid><description>&lt;p>Although a straightforward procedure, simple linear regression captures some key ideas about model fitting. Let&amp;rsquo;s consider $ x \in \mathbb{R} \rightarrow y \in \mathbb{R} $
+and one is given pairwise data $(y_i,x_i)$. The relationship we assume between $x$ and $y$ is a linear one, yielding a simple model,&lt;/p>
+$$
+\begin{equation}
+y=w_0 + w_1 x,
+\label{eq:lin}
+\end{equation}
+$$&lt;p>where the $w_i \in \mathbb{R}$. Geometrically, we are assuming that scaling an $x$ by $w_1$ and then translating by $w_0$ gets you a $y$. At the risk of being pedantic, one can also express \eqref{eq:lin} as,&lt;/p></description></item></channel></rss>
