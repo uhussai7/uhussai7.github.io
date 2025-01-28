@@ -8,3 +8,18 @@
     padding: 0.5rem; /* Add padding inside columns */
     box-sizing: border-box;
 }
+
+/* Wraps block equations in a horizontally scrollable container */
+.math-scroll {
+    overflow-x: auto;  /* Enables horizontal scrolling */
+    overflow-y: hidden;  /* Prevents vertical scrolling issues */
+    width: 100%;  /* Ensures it doesn't exceed the container */
+    max-width: 100%;
+    padding-bottom: 0.5rem; /* Optional: Adds spacing */
+    white-space: nowrap; /* Prevents line wrapping */
+}
+
+/* Ensures MathJax equations fit inside the wrapper */
+.math-scroll mjx-container {
+    display: inline-block; /* Keeps it properly contained */
+}

@@ -1,8 +1,55 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Posts on Uzair Hussain</title><link>https://uhussai7.github.io/posts/</link><description>Recent content in Posts on Uzair Hussain</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 23 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://uhussai7.github.io/posts/index.xml" rel="self" type="application/rss+xml"/><item><title>Simple Linear Regression</title><link>https://uhussai7.github.io/posts/linear_regression/</link><pubDate>Thu, 23 Jan 2025 00:00:00 +0000</pubDate><guid>https://uhussai7.github.io/posts/linear_regression/</guid><description>&lt;p>Although a straightforward procedure, simple linear regression captures some key ideas about model fitting. Let&amp;rsquo;s consider $ x \in \mathbb{R} \rightarrow y \in \mathbb{R} $
-and one is given pairwise data $(y_i,x_i)$. The relationship we assume between $x$ and $y$ is a linear one, yielding a simple model,&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Uzair Hussain</title>
+    <link>http://192.168.0.218:1313/posts/</link>
+    <description>Recent content in Posts on Uzair Hussain</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 26 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://192.168.0.218:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Self attention and non-local means</title>
+      <link>http://192.168.0.218:1313/posts/self_attention/</link>
+      <pubDate>Sun, 26 Jan 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.0.218:1313/posts/self_attention/</guid>
+      
+      <description>&lt;p&gt;Non-local means is a denoising technique that preserves details; at its core it is
+a weighted average of the image. Assuming a 1d signal we have,&lt;/p&gt;
+$$
+\begin{equation}
+I(x) = \frac{1}{Z(x)} \int  K (x,\tilde{x}) I&#39;(\tilde{x}) d \tilde{x}
+\label{eq:nonlocal}
+\end{equation}
+$$&lt;p&gt;where,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$I(x)$ is the filtered image&lt;/li&gt;
+&lt;li&gt;\(I&#39;(\tilde{x})\) is the unfiltered image&lt;/li&gt;
+&lt;li&gt;$K (x,\tilde{x})$ is weighting function&lt;/li&gt;
+&lt;li&gt;$Z(x)$ is a normalization factor given by $\int   K (x,\tilde{x})  d \tilde{x}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Typically, the goal is to take an average of pixels that have similar values. A simple
+weighting function that achieves this is,&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Simple Linear Regression</title>
+      <link>http://192.168.0.218:1313/posts/linear_regression/</link>
+      <pubDate>Thu, 23 Jan 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.0.218:1313/posts/linear_regression/</guid>
+      
+      <description>&lt;p&gt;Although a straightforward procedure, simple linear regression captures some key ideas about model fitting. Let&amp;rsquo;s consider $ x \in \mathbb{R} \rightarrow y \in \mathbb{R} $
+and one is given pairwise data $(y_i,x_i)$. The relationship we assume between $x$ and $y$ is a linear one, yielding a simple model,&lt;/p&gt;
 $$
 \begin{equation}
 y=w_0 + w_1 x,
 \label{eq:lin}
 \end{equation}
-$$&lt;p>where the $w_i \in \mathbb{R}$. Geometrically, we are assuming that scaling an $x$ by $w_1$ and then translating by $w_0$ gets you a $y$. At the risk of being pedantic, one can also express \eqref{eq:lin} as,&lt;/p></description></item></channel></rss>
+$$&lt;p&gt;where the $w_i \in \mathbb{R}$. Geometrically, we are assuming that scaling an $x$ by $w_1$ and then translating by $w_0$ gets you a $y$. At the risk of being pedantic, one can also express \eqref{eq:lin} as,&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>

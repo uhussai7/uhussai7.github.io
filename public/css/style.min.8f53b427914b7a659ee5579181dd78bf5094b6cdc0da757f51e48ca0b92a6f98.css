@@ -1,0 +1,1 @@
+.columns{display:flex;gap:1rem}.column{flex:.33;padding:.5rem;box-sizing:border-box}.math-scroll{overflow-x:auto;overflow-y:hidden;width:100%;max-width:100%;padding-bottom:.5rem;white-space:nowrap}.math-scroll mjx-container{display:inline-block}

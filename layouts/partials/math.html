@@ -1,20 +1,23 @@
-<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
-<script>
-  MathJax = {
-    tex: {
-      displayMath: [['\\[', '\\]'], ['$$', '$$']],  // block
-      inlineMath: [['\\(', '\\)']]                  // inline
-    }
-  };
-</script>
 <script>
   window.MathJax = {
     tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']], // Allows inline math
+      displayMath: [['$$', '$$'], ['\\[', '\\]']], // Allows block math
       tags: "ams"  // Enables equation numbering and referencing
     },
     svg: {
       fontCache: "global"
     }
   };
-  </script>
-  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  // Ensure all MathJax block equations are wrapped in a scrollable div
+  document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll("mjx-container[display='true']").forEach(el => {
+      let wrapper = document.createElement("div");
+      wrapper.className = "math-scroll";
+      el.parentNode.insertBefore(wrapper, el);
+      wrapper.appendChild(el);
+    });
+  });
+</script>
+<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>

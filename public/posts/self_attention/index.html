@@ -33,11 +33,11 @@
 <meta http-equiv="content-type" content="text/html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title itemprop="name">404 Page not found | Uzair Hussain</title>
-<meta property="og:title" content="404 Page not found | Uzair Hussain" />
-<meta name="twitter:title" content="404 Page not found | Uzair Hussain" />
-<meta itemprop="name" content="404 Page not found | Uzair Hussain" />
-<meta name="application-name" content="404 Page not found | Uzair Hussain" />
+<title itemprop="name">Self attention and non-local means | Uzair Hussain</title>
+<meta property="og:title" content="Self attention and non-local means | Uzair Hussain" />
+<meta name="twitter:title" content="Self attention and non-local means | Uzair Hussain" />
+<meta itemprop="name" content="Self attention and non-local means | Uzair Hussain" />
+<meta name="application-name" content="Self attention and non-local means | Uzair Hussain" />
 <meta property="og:site_name" content="Uzair Hussain" />
 
 <meta name="description" content="">
@@ -48,32 +48,84 @@
 <meta property="og:locale" content="en-us" />
 <meta name="language" content="en-us" />
 
-  <link rel="alternate" hreflang="en" href="http://192.168.0.218:1313/404.html" title="" />
+  <link rel="alternate" hreflang="en" href="http://192.168.0.218:1313/posts/self_attention/" title="" />
 
 
 
 
+
+    
+    
+    
+
+    <meta property="og:type" content="article" />
+    <meta property="og:article:published_time" content=2025-01-26T00:00:00Z />
+    <meta property="article:published_time" content=2025-01-26T00:00:00Z />
+    <meta property="og:url" content="http://192.168.0.218:1313/posts/self_attention/" />
+
+    
+    <meta property="og:article:author" content="Uzair Hussain" />
+    <meta property="article:author" content="Uzair Hussain" />
+    <meta name="author" content="Uzair Hussain" />
+    
+    
+
+    
+
+    <script defer type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "Article",
+        "headline": "Self attention and non-local means",
+        "author": {
+        "@type": "Person",
+        "name": ""
+        },
+        "datePublished": "2025-01-26",
+        "description": "",
+        "wordCount":  517 ,
+        "mainEntityOfPage": "True",
+        "dateModified": "2025-01-26",
+        "image": {
+        "@type": "imageObject",
+        "url": ""
+        },
+        "publisher": {
+        "@type": "Organization",
+        "name": "Uzair Hussain"
+        }
+    }
+    </script>
 
 
 <meta name="generator" content="Hugo 0.142.0">
 
     
-    <meta property="og:url" content="http://192.168.0.218:1313/404.html">
+    <meta property="og:url" content="http://192.168.0.218:1313/posts/self_attention/">
   <meta property="og:site_name" content="Uzair Hussain">
-  <meta property="og:title" content="404 Page not found">
+  <meta property="og:title" content="Self attention and non-local means">
+  <meta property="og:description" content="Non-local means is a denoising technique that preserves details; at its core it is a weighted average of the image. Assuming a 1d signal we have,
+$$ \begin{equation} I(x) = \frac{1}{Z(x)} \int K (x,\tilde{x}) I&#39;(\tilde{x}) d \tilde{x} \label{eq:nonlocal} \end{equation} $$where,
+$I(x)$ is the filtered image \(I&#39;(\tilde{x})\) is the unfiltered image $K (x,\tilde{x})$ is weighting function $Z(x)$ is a normalization factor given by $\int K (x,\tilde{x}) d \tilde{x}$ Typically, the goal is to take an average of pixels that have similar values. A simple weighting function that achieves this is,">
   <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-01-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-01-26T00:00:00+00:00">
 
 
     
     
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="404 Page not found">
+  <meta name="twitter:title" content="Self attention and non-local means">
+  <meta name="twitter:description" content="Non-local means is a denoising technique that preserves details; at its core it is a weighted average of the image. Assuming a 1d signal we have,
+$$ \begin{equation} I(x) = \frac{1}{Z(x)} \int K (x,\tilde{x}) I&#39;(\tilde{x}) d \tilde{x} \label{eq:nonlocal} \end{equation} $$where,
+$I(x)$ is the filtered image \(I&#39;(\tilde{x})\) is the unfiltered image $K (x,\tilde{x})$ is weighting function $Z(x)$ is a normalization factor given by $\int K (x,\tilde{x}) d \tilde{x}$ Typically, the goal is to take an average of pixels that have similar values. A simple weighting function that achieves this is,">
 
 
     
 
-    <link rel="canonical" href="http://192.168.0.218:1313/404.html">
+    <link rel="canonical" href="http://192.168.0.218:1313/posts/self_attention/">
     <link href="/style.min.e390ba7da26222f4dc42a349955d76dbbe44e5ce2535a43de5a70633a0a9ec3c.css" rel="stylesheet">
     <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
 
@@ -158,7 +210,7 @@ stroke-linejoin="round" class="feather feather-home">
                 </li>
                 
                 <li>
-                    <a class="menu-link " href="/posts/">
+                    <a class="menu-link active" href="/posts/">
                         Posts
                     </a>
                     
@@ -180,11 +232,133 @@ stroke-linejoin="round" class="feather feather-home">
     </nav>
 </div>
 
-<div class="wrapper">
-    <main class="main-404" aria-label="Content">
-        <h1></h1>
-        <p></p>
-    </main>
+<div class="wrapper post">
+    <main class="page-content" aria-label="Content">
+        <article>
+            <header class="header">
+                <h1 class="header-title">Self attention and non-local means</h1>
+                
+                
+                
+                <div class="post-meta">
+                    <time datetime="2025-01-26T00:00:00&#43;00:00" itemprop="datePublished"> Jan 26, 2025 </time>
+                </div>
+                
+            </header>
+            
+            <div class="page-content">
+                <p>Non-local means is a denoising technique that preserves details; at its core it is
+a weighted average of the image. Assuming a 1d signal we have,</p>
+$$
+\begin{equation}
+I(x) = \frac{1}{Z(x)} \int  K (x,\tilde{x}) I'(\tilde{x}) d \tilde{x}
+\label{eq:nonlocal}
+\end{equation}
+$$<p>where,</p>
+<ul>
+<li>$I(x)$ is the filtered image</li>
+<li>\(I'(\tilde{x})\) is the unfiltered image</li>
+<li>$K (x,\tilde{x})$ is weighting function</li>
+<li>$Z(x)$ is a normalization factor given by $\int   K (x,\tilde{x})  d \tilde{x}$</li>
+</ul>
+<p>Typically, the goal is to take an average of pixels that have similar values. A simple
+weighting function that achieves this is,</p>
+$$
+\begin{equation}
+    K(x,\tilde{x}) = \exp\left[ - \frac{ \left( I'(x) - I'(\tilde{x}) \right)^2 }{h^2} \right]
+\label{eq:weight}    
+\end{equation}
+$$<p>where $h$ is a scale factor.</p>
+<p>To deepen our understanding of the self-attention mechanism, let&rsquo;s try to write \eqref{eq:nonlocal} and \eqref{eq:weight} with the key, query and value matrices
+that are commonly used in the transformer architecture.</p>
+<p>Assuming discrete 1d signal \( I'\in \mathbb{R}^{n} \), we want,</p>
+$$
+\begin{equation}
+    -(I_i' - I_j')^2 = -I_i'^2 - I_j'^2 + 2 I_i' I_j' = (X_i W_Q) ( X_j W_K)^T 
+    \label{eq:expand}
+\end{equation}
+$$<p>where,</p>
+<ul>
+<li>$W_Q \in \mathbb{R}^{d\times m}$ is the query matrix</li>
+<li>$W_K \in \mathbb{R}^{d\times m}$ is the key matrix</li>
+<li>$I&rsquo;_i$ is a pixel of $I'$</li>
+<li>$X_i \in \mathbb{R}^{1 \times d}$ is a feature vector, more precisely \(X_i = \Xi(I'_i)\) where \(\Xi\) is an embedding function.</li>
+</ul>
+<p>One way to achieve this is to take $m=d=3$,</p>
+$$
+\begin{equation}
+    X_i = \Xi(I_i') = 
+    \begin{bmatrix}
+        I_i'^2 & I_i' & 1 
+    \end{bmatrix}, \hspace{0.5cm}
+\end{equation}
+$$$$
+\begin{equation}
+    W_Q=\begin{bmatrix}
+        1 & 0         & 0 \\
+        0 & \sqrt{2}  & 0\\ 
+        0 & 0         & 1
+    \end{bmatrix} \hspace{0.5cm}
+    W_K=\begin{bmatrix}
+        0 & 0         & -1 \\
+        0 & \sqrt{2} & 0\\ 
+        -1 & 0         & 0
+    \end{bmatrix}
+\end{equation}
+$$<!-- We can also make this unnecessarily complicated by introducing the imaginary unit \(i=\sqrt{-1}\), then we have,
+
+$$
+\begin{equation}
+    W_Q=\begin{bmatrix}
+        i & 0         & 0 \\
+        0 & \sqrt{2}  & 0\\ 
+        0 & 0         & i
+    \end{bmatrix}, \hspace{0.5 cm}
+    W_K=\begin{bmatrix}
+        0 & 0         & i \\
+        0 & \sqrt{2} & 0\\ 
+        i & 0         & 0
+    \end{bmatrix}
+\end{equation}
+$$ -->
+<p>Now, we have (assuming $h=1$),</p>
+$$
+\begin{align}
+    \alpha_{ij} &= \frac{\exp\left[(X_i W_Q) ( X_j W_K)^T \right]}{ \sum_j \exp\left[(X_i W_Q) ( X_j W_K)^T \right] } \\
+                &= \text{softmax}_j \left( (X_i W_Q) ( X_j W_K)^T   \right) \\
+                &= \frac{\exp \left[-  \left(I'_i -I'_j \right)^2 \right]}{ \sum_j \exp \left[ - \left(I'_i -I'_j \right)^2  \right]} \\
+                &= \frac{1}{Z(i)} K(i,j)
+\end{align}
+$$<p>where $\text{softmax}_j (.)$ means normalizing over $j$ index.</p>
+<p>Now usually there is a value matrix, $W_V$, also, but to make the connection with non-local means it is not needed. So let&rsquo;s take,</p>
+$$
+\begin{equation}
+    V_i = I'_i
+\end{equation}
+$$<p>Going back to \eqref{eq:nonlocal}, we have,</p>
+$$
+\begin{align}
+    I(i) &= \frac{1}{Z(i)} \sum_j K(i,j) I'_j \\
+         &= \sum_j \alpha_{ij} I'_j \\
+         &= \sum_j \text{softmax}_j \left( (X_i W_Q) ( X_j W_K)^T  \right)  V_j
+\end{align}
+$$<p>We can go a bit further and compute the whole vector $I \in \mathbb{R}^n$, and bring back $h$,</p>
+$$
+\begin{align}
+    I =  \text{softmax} \left( \frac{Q K^T}{h^2} \right) V
+\end{align}
+$$<p>where</p>
+<ul>
+<li>$V \in \mathbb{R}^n$</li>
+<li>$K =X W_K$, where $X \in \mathbb{R}^{n \times d} $, $W_K \in \mathbb{R}^{d \times m} $ and $K \in \mathbb{R}^{n \times m} $</li>
+<li>$Q =X W_Q $, where $X \in \mathbb{R}^{n \times d} $, $W_Q \in \mathbb{R}^{d \times m} $ and $Q \in \mathbb{R}^{n \times m} $</li>
+<li>$\text{softmax} \left( \frac{Q K^T}{h^2} \right) \in  \mathbb{R}^{n \times n}$</li>
+</ul>
+<p>Here, $\text{softmax}(.)$ is a row-wise operation. Note that this self-attention is scaled with $h^2$ rather than the usual
+self-attention, which is scaled with $\sqrt{d}$.</p>
+
+            </div>
+        </article></main>
 </div>
 <footer class="footer">
     <span class="footer_item"> </span>

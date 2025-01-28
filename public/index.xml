@@ -1,18 +1,76 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Uzair Hussain</title><link>https://uhussai7.github.io/</link><description>Recent content on Uzair Hussain</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 23 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://uhussai7.github.io/index.xml" rel="self" type="application/rss+xml"/><item><title>Simple Linear Regression</title><link>https://uhussai7.github.io/posts/linear_regression/</link><pubDate>Thu, 23 Jan 2025 00:00:00 +0000</pubDate><guid>https://uhussai7.github.io/posts/linear_regression/</guid><description>&lt;p>Although a straightforward procedure, simple linear regression captures some key ideas about model fitting. Let&amp;rsquo;s consider $ x \in \mathbb{R} \rightarrow y \in \mathbb{R} $
-and one is given pairwise data $(y_i,x_i)$. The relationship we assume between $x$ and $y$ is a linear one, yielding a simple model,&lt;/p>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Uzair Hussain</title>
+    <link>http://192.168.0.218:1313/</link>
+    <description>Recent content on Uzair Hussain</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 26 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://192.168.0.218:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Self attention and non-local means</title>
+      <link>http://192.168.0.218:1313/posts/self_attention/</link>
+      <pubDate>Sun, 26 Jan 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.0.218:1313/posts/self_attention/</guid>
+      
+      <description>&lt;p&gt;Non-local means is a denoising technique that preserves details; at its core it is
+a weighted average of the image. Assuming a 1d signal we have,&lt;/p&gt;
+$$
+\begin{equation}
+I(x) = \frac{1}{Z(x)} \int  K (x,\tilde{x}) I&#39;(\tilde{x}) d \tilde{x}
+\label{eq:nonlocal}
+\end{equation}
+$$&lt;p&gt;where,&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$I(x)$ is the filtered image&lt;/li&gt;
+&lt;li&gt;\(I&#39;(\tilde{x})\) is the unfiltered image&lt;/li&gt;
+&lt;li&gt;$K (x,\tilde{x})$ is weighting function&lt;/li&gt;
+&lt;li&gt;$Z(x)$ is a normalization factor given by $\int   K (x,\tilde{x})  d \tilde{x}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Typically, the goal is to take an average of pixels that have similar values. A simple
+weighting function that achieves this is,&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title>Simple Linear Regression</title>
+      <link>http://192.168.0.218:1313/posts/linear_regression/</link>
+      <pubDate>Thu, 23 Jan 2025 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.0.218:1313/posts/linear_regression/</guid>
+      
+      <description>&lt;p&gt;Although a straightforward procedure, simple linear regression captures some key ideas about model fitting. Let&amp;rsquo;s consider $ x \in \mathbb{R} \rightarrow y \in \mathbb{R} $
+and one is given pairwise data $(y_i,x_i)$. The relationship we assume between $x$ and $y$ is a linear one, yielding a simple model,&lt;/p&gt;
 $$
 \begin{equation}
 y=w_0 + w_1 x,
 \label{eq:lin}
 \end{equation}
-$$&lt;p>where the $w_i \in \mathbb{R}$. Geometrically, we are assuming that scaling an $x$ by $w_1$ and then translating by $w_0$ gets you a $y$. At the risk of being pedantic, one can also express \eqref{eq:lin} as,&lt;/p></description></item><item><title/><link>https://uhussai7.github.io/resume/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://uhussai7.github.io/resume/</guid><description>&lt;h1 id="uzair-hussain">Uzair Hussain&lt;/h1>
-&lt;p>&amp;#x2709;&amp;#xfe0f; : &lt;a href="mailto:ughussain@gmail.com">ughussain@gmail.com&lt;/a>&lt;/p>
-&lt;hr>
-&lt;hr>
-&lt;hr>
-&lt;hr>
-&lt;h1 id="wave-about-me">&amp;#x1f44b; About me&lt;/h1>
-&lt;p>I am a researcher with a decade of experience in tackling complex problems ranging from advanced physics
+$$&lt;p&gt;where the $w_i \in \mathbb{R}$. Geometrically, we are assuming that scaling an $x$ by $w_1$ and then translating by $w_0$ gets you a $y$. At the risk of being pedantic, one can also express \eqref{eq:lin} as,&lt;/p&gt;</description>
+      
+    </item>
+    
+    <item>
+      <title></title>
+      <link>http://192.168.0.218:1313/resume/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://192.168.0.218:1313/resume/</guid>
+      
+      <description>&lt;h1 id=&#34;uzair-hussain&#34;&gt;Uzair Hussain&lt;/h1&gt;
+&lt;p&gt;&amp;#x2709;&amp;#xfe0f; : &lt;a href=&#34;mailto:ughussain@gmail.com&#34;&gt;ughussain@gmail.com&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;wave-about-me&#34;&gt;&amp;#x1f44b; About me&lt;/h1&gt;
+&lt;p&gt;I am a researcher with a decade of experience in tackling complex problems ranging from advanced physics
 simulations to using AI to image the brain and predict its neuronal activity. My expertise, honed through a PhD
 in theoretical physics and work in medical imaging, neuroscience, and AI, spans a broad spectrum of skills. I am
-a fast-learner, creative, knowledgeable, and have a profound passion for uncovering insights from data.&lt;/p></description></item></channel></rss>
+a fast-learner, creative, knowledgeable, and have a profound passion for uncovering insights from data.&lt;/p&gt;</description>
+      
+    </item>
+    
+  </channel>
+</rss>
