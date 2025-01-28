@@ -38,7 +38,7 @@ where $h$ is a scale factor.
 To deepen our understanding of the self-attention mechanism, let's try to write \eqref{eq:nonlocal} and \eqref{eq:weight} with the key, query and value matrices 
 that are commonly used in the transformer architecture.
 
-Assuming discrete 1d signal \( I'\in \mathbb{R}^{n} \), we want,
+Assuming discrete 1d signal \( I'\in \mathbb{R}^{n\times 1} \), we want,
 
 $$
 \begin{equation}
@@ -108,13 +108,24 @@ $$
 
 where $\text{softmax}_j (.)$ means normalizing over $j$ index.
 
-Now usually there is a value matrix, $W_V$, also, but to make the connection with non-local means it is not needed. So let's take,
+<!-- Now usually there is a value matrix, $W_V$, also, but to make the connection with non-local means it is not needed. So let's take, -->
 
-$$
+<!-- $$
 \begin{equation}
     V_i = I'_i
 \end{equation}
+$$ -->
+
+In the transformer self attention mechanism we have value matrix, $W_V$. In this setup it would be simply,
+
 $$
+\begin{equation}
+    W_V= \begin{bmatrix} 0 \\ 1 \\ 0 \end{bmatrix}
+\end{equation}
+$$
+
+
+
 
 Going back to \eqref{eq:nonlocal}, we have,
 
@@ -122,11 +133,11 @@ $$
 \begin{align}
     I(i) &= \frac{1}{Z(i)} \sum_j K(i,j) I'_j \\
          &= \sum_j \alpha_{ij} I'_j \\
-         &= \sum_j \text{softmax}_j \left( (X_i W_Q) ( X_j W_K)^T  \right)  V_j
+         &= \sum_j \text{softmax}_j \left( (X_i W_Q) ( X_j W_K)^T  \right)  X_j W_V
 \end{align}
 $$
 
-We can go a bit further and compute the whole vector $I \in \mathbb{R}^n$, and bring back $h$,
+We can go a bit further and compute the whole vector $I \in \mathbb{R}^{n\times 1}$, and bring back $h$,
 
 $$
 \begin{align}
@@ -136,9 +147,9 @@ $$
 
 where
 
-- $V \in \mathbb{R}^n$
-- $K =X W_K$, where $X \in \mathbb{R}^{n \times d} $, $W_K \in \mathbb{R}^{d \times m} $ and $K \in \mathbb{R}^{n \times m} $ 
-- $Q =X W_Q $, where $X \in \mathbb{R}^{n \times d} $, $W_Q \in \mathbb{R}^{d \times m} $ and $Q \in \mathbb{R}^{n \times m} $ 
+- $V = X W_V$, where $X \in \mathbb{R}^{n \times d}$, $W_V \in \mathbb{R}^{d \times 1}$ and $V \in \mathbb{R}^{n \times 1}$
+- $K =X W_K$, where  $W_K \in \mathbb{R}^{d \times m} $ and $K \in \mathbb{R}^{n \times m} $ 
+- $Q =X W_Q $, where $W_Q \in \mathbb{R}^{d \times m} $ and $Q \in \mathbb{R}^{n \times m} $ 
 - $\text{softmax} \left( \frac{Q K^T}{h^2} \right) \in  \mathbb{R}^{n \times n}$ 
 
 Here, $\text{softmax}(.)$ is a row-wise operation. Note that this self-attention is scaled with $h^2$ rather than the usual
