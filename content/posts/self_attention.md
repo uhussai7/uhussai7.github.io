@@ -53,7 +53,7 @@ where,
 - $I'_i$ is a pixel of $I'$ 
 - $X_i \in \mathbb{R}^{1 \times d}$ is a feature vector, more precisely \(X_i = \Xi(I'_i)\) where \(\Xi\) is an embedding function.
 
-One way to achieve this is to take $m=d=3$,
+One way to achieve this is to take $m=d=3$, and assume the following;
 
 $$
 \begin{equation}
