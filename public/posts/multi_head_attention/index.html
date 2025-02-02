@@ -33,11 +33,11 @@
 <meta http-equiv="content-type" content="text/html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title itemprop="name">Posts | Uzair Hussain</title>
-<meta property="og:title" content="Posts | Uzair Hussain" />
-<meta name="twitter:title" content="Posts | Uzair Hussain" />
-<meta itemprop="name" content="Posts | Uzair Hussain" />
-<meta name="application-name" content="Posts | Uzair Hussain" />
+<title itemprop="name">Multi-head self attention | Uzair Hussain</title>
+<meta property="og:title" content="Multi-head self attention | Uzair Hussain" />
+<meta name="twitter:title" content="Multi-head self attention | Uzair Hussain" />
+<meta itemprop="name" content="Multi-head self attention | Uzair Hussain" />
+<meta name="application-name" content="Multi-head self attention | Uzair Hussain" />
 <meta property="og:site_name" content="Uzair Hussain" />
 
 <meta name="description" content="">
@@ -48,20 +48,12 @@
 <meta property="og:locale" content="en-us" />
 <meta name="language" content="en-us" />
 
-  <link rel="alternate" hreflang="en" href="http://192.168.0.218:1313/posts/" title="" />
+  <link rel="alternate" hreflang="en" href="http://192.168.0.218:1313/posts/multi_head_attention/" title="" />
 
 
 
 
 
-    
-    
-    
-    
-    
-    <link rel="first" href="/posts/" />
-    <link rel="last" href="/posts/" />
-    
     
     
     
@@ -69,7 +61,7 @@
     <meta property="og:type" content="article" />
     <meta property="og:article:published_time" content=2025-02-01T00:00:00Z />
     <meta property="article:published_time" content=2025-02-01T00:00:00Z />
-    <meta property="og:url" content="http://192.168.0.218:1313/posts/" />
+    <meta property="og:url" content="http://192.168.0.218:1313/posts/multi_head_attention/" />
 
     
     <meta property="og:article:author" content="Uzair Hussain" />
@@ -84,14 +76,14 @@
     {
         "@context": "http://schema.org",
         "@type": "Article",
-        "headline": "Posts",
+        "headline": "Multi-head self attention",
         "author": {
         "@type": "Person",
         "name": ""
         },
         "datePublished": "2025-02-01",
         "description": "",
-        "wordCount":  0 ,
+        "wordCount":  369 ,
         "mainEntityOfPage": "True",
         "dateModified": "2025-02-01",
         "image": {
@@ -109,24 +101,29 @@
 <meta name="generator" content="Hugo 0.142.0">
 
     
-    <meta property="og:url" content="http://192.168.0.218:1313/posts/">
+    <meta property="og:url" content="http://192.168.0.218:1313/posts/multi_head_attention/">
   <meta property="og:site_name" content="Uzair Hussain">
-  <meta property="og:title" content="Posts">
+  <meta property="og:title" content="Multi-head self attention">
+  <meta property="og:description" content="Math Here we will define and carry out a PyTorch implementation of multi-head self attention. We introduced self attention in a previous post exploring a connection with non-local means.
+Let us now introduce self attention as used in transformer-like models. I will experiment with Einstein notation here to see if it makes things easier or more complicated. Below, the exponents to $\mathbb{R}$ are in the same order as the indices. For a single “head”, we have;">
   <meta property="og:locale" content="en_us">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-02-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-02-01T00:00:00+00:00">
 
 
     
     
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Posts">
+  <meta name="twitter:title" content="Multi-head self attention">
+  <meta name="twitter:description" content="Math Here we will define and carry out a PyTorch implementation of multi-head self attention. We introduced self attention in a previous post exploring a connection with non-local means.
+Let us now introduce self attention as used in transformer-like models. I will experiment with Einstein notation here to see if it makes things easier or more complicated. Below, the exponents to $\mathbb{R}$ are in the same order as the indices. For a single “head”, we have;">
 
 
     
 
-    <link rel="canonical" href="http://192.168.0.218:1313/posts/">
-    <link href="/posts/index.xml" rel="alternate" type="application/rss+xml" title="Uzair Hussain">
-    <link href="/posts/index.xml" rel="feed" type="application/rss+xml" title="Uzair Hussain">
+    <link rel="canonical" href="http://192.168.0.218:1313/posts/multi_head_attention/">
     <link href="/style.min.e390ba7da26222f4dc42a349955d76dbbe44e5ce2535a43de5a70633a0a9ec3c.css" rel="stylesheet">
     <link href="/code-highlight.min.706d31975fec544a864cb7f0d847a73ea55ca1df91bf495fd12a177138d807cf.css" rel="stylesheet">
 
@@ -232,74 +229,66 @@ stroke-linejoin="round" class="feather feather-home">
         </div>
     </nav>
 </div>
-<div class="wrapper list-page">
-    <header class="header">
-        <h1 class="header-title center">Posts</h1>
-    </header>
+
+<div class="wrapper post">
     <main class="page-content" aria-label="Content">
-        
-        
-        <h2 class="post-year">2025</h2>
+        <article>
+            <header class="header">
+                <h1 class="header-title">Multi-head self attention</h1>
+                
+                
+                
+                <div class="post-meta">
+                    <time datetime="2025-02-01T00:00:00&#43;00:00" itemprop="datePublished"> Feb 1, 2025 </time>
+                </div>
+                
+            </header>
+            
+            <div class="page-content">
+                <h3 id="math">Math</h3>
+<p>Here we will define and carry out a PyTorch implementation of multi-head self attention.
+We introduced self attention in a <a href="/posts/self_attention/">previous post</a> exploring a connection with non-local means.</p>
+<p>Let us now introduce self attention as used in transformer-like models. I will experiment
+with <a href="https://en.wikipedia.org/wiki/Einstein_notation">Einstein notation</a> here to see if it makes things easier or more complicated. Below,
+the exponents to $\mathbb{R}$ are in the same order as the indices. For a single &ldquo;head&rdquo;, we have;</p>
+$$
+\begin{align}
+    \text{Attention}(Q, K, V)_{ai} = \text{softmax} \left( \frac{Q_{a j} K_{b}^{\ \ j}}{\sqrt{d_k}} \right) V^{b}_{\ \ \ i}
+\end{align}
+$$<p>where $Q_{a i}, K_{a i} \in \mathbb{R}^{N \times d_k}$, and $V_{ai} \in \mathbb{R}^{N \times d_v}$</p>
+<p>and,</p>
+$$
+\begin{align}
+    \nonumber Q_{ai} &= X_{aj} \left(W_{Q} \right)_{i}^{\ \ j}, \ \ \ \ K_{ai} = X_{aj} \left(W_{K} \right)_{i}^{\ \ j}\\ 
+    & \ \ \ \text{and} \ \ \ \ V_{ai} = X_{a}^{\ j} \left(W_{V}\right)_{ij}
+\end{align}
+$$<p>where,</p>
+<ul>
+<li>\(\left(W_{Q}\right)_{ij}, \left(W_{K} \right)_{ij} \in  \mathbb{R}^{d_m \times d_k} \) and  $ \left(W_{V}\right)_{ij} \in  \mathbb{R}^{d_m \times d_v}$</li>
+<li>$X_{ai} = \Xi\left( I\right) \in \mathbb{R}^{N \times d_m}$, where $I_{ai} \in \mathbb{R}^{N \times d_{\text{input}}}$ is the input signal and $\Xi$ is an embedding function.</li>
+</ul>
+<p>Okay so that notation looks pretty busy 😵‍💫, but things appear to be more explicit.</p>
+<p>Going to multi-head attention is simple,</p>
+$$
+\newcommand{\Q}{Q}
+\newcommand{\K}{K}
+\newcommand{\V}{V}
+\begin{align}
+    \text{MultiHead}(\Q, \K, \V)_{ai} =\left(W_O \right)^{\mu j}_{\ \ \ \ i} \  \text{Attention}(Q,K,V)_{\mu aj}
+\end{align}
+$$<p>where $(W_O)_{\mu j i} \in \mathbb{R}^{h \times d_v \times d_m}$ and $h$ is the number of heads. Here the extra index, $\mu$ runs over different heads of self attention. The attention for each head is given by,</p>
+$$
+\begin{equation}
+    \text{Attention}(Q, K, V)_{\mu a i} = \text{softmax} \left( \frac{Q_{\mu a j} K_{\mu b}^{\ \ \ \ j}}{\sqrt{d_k}} \right) V^{\ b}_{\mu \ \ i}
+\end{equation}
+$$<p>Note here, that although $\mu$ is repeated it is a label and a free index on the LHS.</p>
+<p>I am going to abuse notation more; consider a tensor $A_{\mu a i j} \in \mathbb{R}^{n \times m \times p \times q}$ then $A_{\mu |ai,j|} \in \mathbb{R}^{n \times m p \times q}$, which is to be interpreted as a batch of matrices. These type of index fusions will help us keep track of large matrices that are GPU friendly.</p>
+<h3 id="pytorch-implementation">PyTorch implementation</h3>
 
-        
-
-        
-
-        <article class="post-item">
-    <h4 class="post-item-title">
-        <a href="/posts/multi_head_attention/">Multi-head self attention</a>
-    </h4>
-    
-    
-    
-    
-    <time class="post-item-meta" datetime="2025-02-01T00:00:00Z">
-        1 Feb 2025
-        
-    </time>
-</article>
-
-
-        
-
-        <article class="post-item">
-    <h4 class="post-item-title">
-        <a href="/posts/self_attention/">Self attention and non-local means</a>
-    </h4>
-    
-    
-    
-    
-    <time class="post-item-meta" datetime="2025-01-26T00:00:00Z">
-        26 Jan 2025
-        
-    </time>
-</article>
-
-
-        
-
-        <article class="post-item">
-    <h4 class="post-item-title">
-        <a href="/posts/linear_regression/">Simple Linear Regression</a>
-    </h4>
-    
-    
-    
-    
-    <time class="post-item-meta" datetime="2025-01-23T00:00:00Z">
-        23 Jan 2025
-        
-    </time>
-</article>
-
-
-         
-
-         
-
-    </main>
-</div><footer class="footer">
+            </div>
+        </article></main>
+</div>
+<footer class="footer">
     <span class="footer_item"> </span>
     &nbsp;
 
