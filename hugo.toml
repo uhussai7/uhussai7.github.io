@@ -22,7 +22,14 @@ enableEmoji = true
           inline = [['\(', '\)']]
     [markup.goldmark.renderer]
     unsafe = true
-    
+
+    [markup.highlight]
+      noClasses = false  # Use CSS classes for styling
+      style = "monokai"  # Choose from styles like dracula, github, etc.
+      lineNos = true     # Enable line numbers if needed
+      lineNumbersInTable = false
+      codeFences = true
+
 [menu]
   [[menu.main]] 
     # The page reference (pageRef) is useful for menu highlighting

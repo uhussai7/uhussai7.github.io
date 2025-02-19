@@ -92,6 +92,8 @@ ___
         {{< column width="2" >}}
             <br><br><br>
             <a href="https://github.com/uhussai7/boldreams.git" target="_blank"> <span style="font-size: 1.5em;"> &#x1F9D1;&#x200D;&#x1F4BB; </span> <br>  code </a> <br>
+            <a href="https://arxiv.org/pdf/2501.14854" target="_blank">  <span style="font-size: 1.5em;"> &#x1F4DC; </span> <br> paper
+            </a>
         {{< /column >}}
     {{< /column >}}
     {{< column width="9" >}}

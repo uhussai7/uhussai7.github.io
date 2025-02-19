@@ -23,3 +23,8 @@
 .math-scroll mjx-container {
     display: inline-block; /* Keeps it properly contained */
 }
+
+
+pre, code {
+    font-size: 0.85em; /* Adjust this value as needed */
+}

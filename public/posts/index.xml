@@ -6,20 +6,19 @@
     <description>Recent content in Posts on Uzair Hussain</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 01 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://192.168.0.218:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 14 Feb 2025 00:00:00 +0000</lastBuildDate><atom:link href="http://192.168.0.218:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Multi-head self attention</title>
       <link>http://192.168.0.218:1313/posts/multi_head_attention/</link>
-      <pubDate>Sat, 01 Feb 2025 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 14 Feb 2025 00:00:00 +0000</pubDate>
       
       <guid>http://192.168.0.218:1313/posts/multi_head_attention/</guid>
       
       <description>&lt;h3 id=&#34;math&#34;&gt;Math&lt;/h3&gt;
 &lt;p&gt;Here we will define and carry out a PyTorch implementation of multi-head self attention.
 We introduced self attention in a &lt;a href=&#34;http://192.168.0.218:1313/posts/self_attention/&#34;&gt;previous post&lt;/a&gt; exploring a connection with non-local means.&lt;/p&gt;
-&lt;p&gt;Let us now introduce self attention as used in transformer-like models. I will experiment
-with &lt;a href=&#34;https://en.wikipedia.org/wiki/Einstein_notation&#34;&gt;Einstein notation&lt;/a&gt; here to see if it makes things easier or more complicated. Below,
-the exponents to $\mathbb{R}$ are in the same order as the indices. For a single &amp;ldquo;head&amp;rdquo;, we have;&lt;/p&gt;</description>
+&lt;p&gt;Let us now introduce multi head self attention as used in transformer-like models. Also, lets experiment
+with &lt;a href=&#34;https://en.wikipedia.org/wiki/Einstein_notation&#34;&gt;Einstein notation&lt;/a&gt; here to see if it makes things easier or more complicated. We will raise and lower indices simply for clarity and not to indicate contravariant or covariant indices. For example,&lt;/p&gt;</description>
       
     </item>
     

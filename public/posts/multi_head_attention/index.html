@@ -59,8 +59,8 @@
     
 
     <meta property="og:type" content="article" />
-    <meta property="og:article:published_time" content=2025-02-01T00:00:00Z />
-    <meta property="article:published_time" content=2025-02-01T00:00:00Z />
+    <meta property="og:article:published_time" content=2025-02-14T00:00:00Z />
+    <meta property="article:published_time" content=2025-02-14T00:00:00Z />
     <meta property="og:url" content="http://192.168.0.218:1313/posts/multi_head_attention/" />
 
     
@@ -81,11 +81,11 @@
         "@type": "Person",
         "name": ""
         },
-        "datePublished": "2025-02-01",
+        "datePublished": "2025-02-14",
         "description": "",
-        "wordCount":  369 ,
+        "wordCount":  1184 ,
         "mainEntityOfPage": "True",
-        "dateModified": "2025-02-01",
+        "dateModified": "2025-02-14",
         "image": {
         "@type": "imageObject",
         "url": ""
@@ -98,19 +98,19 @@
     </script>
 
 
-<meta name="generator" content="Hugo 0.142.0">
+<meta name="generator" content="Hugo 0.143.1">
 
     
     <meta property="og:url" content="http://192.168.0.218:1313/posts/multi_head_attention/">
   <meta property="og:site_name" content="Uzair Hussain">
   <meta property="og:title" content="Multi-head self attention">
   <meta property="og:description" content="Math Here we will define and carry out a PyTorch implementation of multi-head self attention. We introduced self attention in a previous post exploring a connection with non-local means.
-Let us now introduce self attention as used in transformer-like models. I will experiment with Einstein notation here to see if it makes things easier or more complicated. Below, the exponents to $\mathbb{R}$ are in the same order as the indices. For a single “head”, we have;">
+Let us now introduce multi head self attention as used in transformer-like models. Also, lets experiment with Einstein notation here to see if it makes things easier or more complicated. We will raise and lower indices simply for clarity and not to indicate contravariant or covariant indices. For example,">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2025-02-01T00:00:00+00:00">
-    <meta property="article:modified_time" content="2025-02-01T00:00:00+00:00">
+    <meta property="article:published_time" content="2025-02-14T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-02-14T00:00:00+00:00">
 
 
     
@@ -118,7 +118,7 @@ Let us now introduce self attention as used in transformer-like models. I will e
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Multi-head self attention">
   <meta name="twitter:description" content="Math Here we will define and carry out a PyTorch implementation of multi-head self attention. We introduced self attention in a previous post exploring a connection with non-local means.
-Let us now introduce self attention as used in transformer-like models. I will experiment with Einstein notation here to see if it makes things easier or more complicated. Below, the exponents to $\mathbb{R}$ are in the same order as the indices. For a single “head”, we have;">
+Let us now introduce multi head self attention as used in transformer-like models. Also, lets experiment with Einstein notation here to see if it makes things easier or more complicated. We will raise and lower indices simply for clarity and not to indicate contravariant or covariant indices. For example,">
 
 
     
@@ -166,7 +166,7 @@ Let us now introduce self attention as used in transformer-like models. I will e
     
 </head>
 
-    <link rel="stylesheet" href="http://192.168.0.218:1313/css/style.min.8f53b427914b7a659ee5579181dd78bf5094b6cdc0da757f51e48ca0b92a6f98.css" integrity="sha256-j1O0J5FLemWe5VeRgd14v1CUts3A2nV/UeSMoLkqb5g=">
+    <link rel="stylesheet" href="http://192.168.0.218:1313/css/style.min.b5bb71c92160f02a0d6e765a11dfdaef2927ad2e5aefdea4b4ae3500b4cbeeed.css" integrity="sha256-tbtxySFg8CoNbnZaEd/a7yknrS5a796ktK41ALTL7u0=">
     <body data-theme = "light" class="notransition">
 
 <script src="/js/theme.js"></script>
@@ -239,7 +239,7 @@ stroke-linejoin="round" class="feather feather-home">
                 
                 
                 <div class="post-meta">
-                    <time datetime="2025-02-01T00:00:00&#43;00:00" itemprop="datePublished"> Feb 1, 2025 </time>
+                    <time datetime="2025-02-14T00:00:00&#43;00:00" itemprop="datePublished"> Feb 14, 2025 </time>
                 </div>
                 
             </header>
@@ -248,27 +248,139 @@ stroke-linejoin="round" class="feather feather-home">
                 <h3 id="math">Math</h3>
 <p>Here we will define and carry out a PyTorch implementation of multi-head self attention.
 We introduced self attention in a <a href="/posts/self_attention/">previous post</a> exploring a connection with non-local means.</p>
-<p>Let us now introduce self attention as used in transformer-like models. I will experiment
-with <a href="https://en.wikipedia.org/wiki/Einstein_notation">Einstein notation</a> here to see if it makes things easier or more complicated. Below,
-the exponents to $\mathbb{R}$ are in the same order as the indices. For a single &ldquo;head&rdquo;, we have;</p>
+<p>Let us now introduce multi head self attention as used in transformer-like models. Also, lets experiment
+with <a href="https://en.wikipedia.org/wiki/Einstein_notation">Einstein notation</a> here to see if it makes things easier or more complicated. We will raise and lower indices simply for clarity and not to indicate contravariant or covariant indices. For example,</p>
+$$
+\begin{equation}
+    A_{aj} B_b^{\ \ j} = \sum_{j} A_{aj} B_{bj}
+\end{equation}
+$$<p>
+basically a repeated index is summed over unless specified otherwise.  Below, the exponents to $\mathbb{R}$ are in the same order as the indices. For example, when we say $A_{aj} \in \mathbb{R}^{d_a \times d_j} $ then, \(a \in \{0, 1, ... , d_a-1\}\) and \(j \in \{0, 1, ... , d_j-1\}\).</p>
+<p>Consider an input signal,</p>
+$$
+\begin{equation}
+    I_{\tau i} \in \mathbb{R}^{N \times d_{\text{input}}}
+\end{equation}
+$$<p>where $N$ is the context length. Then we have an embedding function $\Xi$ such that,</p>
+$$
+\begin{equation}
+    X_{\tau i} = \Xi \left( I  \right )_{\tau i} \in \mathbb{R}^{N \times d_{m}}
+\end{equation}
+$$<p>The main work horses of the self attention mechanism are the query, key and value matrices. They are, respectively,</p>
+$$
+\begin{equation}
+    \left(W_{Q}\right)_{ia}, \left(W_{K} \right)_{ia} \in  \mathbb{R}^{d_m \times d_k} \ \ \  \text{and}  \ \ \ \left(W_{V}\right)_{ia} \in  \mathbb{R}^{d_m \times d_v}
+\end{equation}
+$$<p>Next we have the attention scores,</p>
 $$
 \begin{align}
-    \text{Attention}(Q, K, V)_{ai} = \text{softmax} \left( \frac{Q_{a j} K_{b}^{\ \ j}}{\sqrt{d_k}} \right) V^{b}_{\ \ \ i}
+    \tilde{A}_{\tau \tau'} &=\frac {X_{\tau}^{\ \ i} \left( W_Q \right)_{ia} \left( W_K \right)_{j}^{\ \ a} X_{\tau'}^{\ \ \ j}}{\sqrt{d_k}} \\
+                           &=\frac {Q_{\tau a} K_{\tau'}^{\ \ \ a}}{\sqrt{d_k}}
 \end{align}
-$$<p>where $Q_{a i}, K_{a i} \in \mathbb{R}^{N \times d_k}$, and $V_{ai} \in \mathbb{R}^{N \times d_v}$</p>
-<p>and,</p>
+$$<p>where \(Q_{\tau a} = X_{\tau}^{\ \ i} \left(W_Q \right)_{ia} \) and \( K_{\tau'}^{\ \ \ a} = \left( W_K \right)_{j}^{\ \ a} X_{\tau'}^{\ \ \ j}\).</p>
+<p>Now to get the attention weights we apply the softmax function,</p>
+$$
+\begin{equation}
+    A_{\tau \tau'} = \text{softmax} ( \tilde{A}_{\tau} ) _{\tau'} = \frac{\exp \left(\tilde{A}_{\tau \tau'} \right)}{\sum_{\tau'} \exp(\tilde{A}_{\tau \tau'})}
+\end{equation}
+$$<p>The next piece of the puzzle is the role of the value matrix,</p>
+$$
+\begin{equation}
+    V_{\tau a} = \left(W_V\right)^{i}_{\ a} X_{\tau i} 
+\end{equation}
+$$<p>So finally we have self-attention defined as,</p>
+$$
+\begin{equation}
+    \text{Attention}(Q,K,V)_{\tau a} = A_{\tau \tau'} V^{\tau'}_{\ \ \ a}
+\end{equation}
+$$<p>Okay, so that&rsquo;s just a single &ldquo;head&rdquo;, i.e., one set of key, query and key matrices. In general, we can have multiple heads, which means we have many
+$W_Q$, $W_K$ and $W_V$ matrices. In index notation this just means that we add a new index, $\mu$ on each of these matrices which then carries over to the
+self-attention;</p>
+$$
+\begin{equation}
+    \text{Attention}(Q,K,V)_{\mu \tau a} = A_{\mu \tau \tau'} V^{\ \tau'}_{\mu \ \ a}
+\end{equation}
+$$<p>In this case the notation is a bit confusing because we have a repeated index on the RHS which is not a summation, but rather is a label. This is specified
+by it being a free index on the LHS.</p>
+<p>Now, we combine all the heads,</p>
+$$
+\begin{align}
+    \text{MultiHead}(Q, K, V)_{\tau i} =\left(W_O \right)^{\mu a}_{\ \ \ \ i} \  \text{Attention}(Q,K,V)_{\mu \tau a}
+\end{align}
+$$<p>where,</p>
+$$
+\begin{equation}
+    (W_O)_{\mu a i} \in \mathbb{R}^{h \times d_v \times d_m}
+\end{equation}
+$$<p>projects back to our embedding space, here $h$ is the number of heads.</p>
+<p>There is one other detail; we should only have attention scores to previous tokens, we can achieve this by adding a mask to $\tilde{A}$,</p>
+$$
+\begin{equation}
+    \tilde{A}_{\mu \tau \tau'} \leftarrow \tilde{A}_{\mu \tau \tau'} + \tilde{M}_{\mu \tau \tau'}
+\end{equation}
+$$<p>where;</p>
+$$
+\begin{equation}
+    \tilde{M}_{\mu \tau \tau'} = 
+            \begin{cases}
+                0, & \text{if } \tau' \leq \tau \ \ \forall \ \ \mu \\
+                -\infty, & \text{if } \tau' \gt \tau \ \ \forall \ \ \mu
+            \end{cases}
+\end{equation}
+$$<h4 id="fusing-indices">Fusing indices</h4>
+<p>I am not sure if the following is standard notation for index fusions, if you know please reach out!</p>
+<p>Consider a tensor $T_{\mu a i j} \in \mathbb{R}^{n \times m \times p \times q}$ then $T_{\mu (ai)j} \in \mathbb{R}^{n \times m p \times q}$, where $(ai)$ is a new single index, given by, $(ai)= a p + i$. Now, $T_{\mu (ai)j}$ is to be interpreted as a batch of 2d matrices, where $\mu$ labels each matrix. These type of index fusions will help us keep track of large matrices that are GPU friendly.</p>
+<p>For example consider the case $d_k=d_v$ and the tensor $W_{\mu B ia}$, where,</p>
+$$
+\begin{equation}
+    W_{\mu 0ia} =  \left(W_{Q} \right)_{\mu ia} ,\ \   W_{\mu 1ia}= \left(W_{K} \right)_{\mu ia} ,\ \  W_{\mu 2ia}= \left(W_{V} \right)_{\mu ia}  
+\end{equation}
+$$<p>again $\mu$ runs over all the heads. We can contract this as,</p>
+$$
+\begin{equation}
+    W_{(\mu B a) i} \in \mathbb{R}^{h3d_k \times d_m}
+\end{equation}
+$$<p>Why? Because all these matrices multiply $X_{\tau i}$. I can do this in one go now;</p>
+$$
+\begin{equation}
+    W_{(\mu Ba)i} X_\tau^{\ \ i}
+\end{equation} 
+$$<p>
+which is a 2d matrix multiplication &#x1f60e;. Although, now I have to split this back to compute the self attention.</p>
+<!-- 
+
+
+
+For a single "head", we have;
+
+$$
+\begin{align}
+    \text{Attention}(Q, K, V)_{ai} &= \text{softmax} \left( \frac{Q_{a j} K_{b}^{\ \ j}}{\sqrt{d_k}} \right) V^{b}_{\ \ \ i} \\
+                                   &=
+\end{align}
+$$
+
+where $Q_{a i}, K_{a i} \in \mathbb{R}^{N \times d_k}$, and $V_{ai} \in \mathbb{R}^{N \times d_v}$
+
+
+and,
+
 $$
 \begin{align}
     \nonumber Q_{ai} &= X_{aj} \left(W_{Q} \right)_{i}^{\ \ j}, \ \ \ \ K_{ai} = X_{aj} \left(W_{K} \right)_{i}^{\ \ j}\\ 
     & \ \ \ \text{and} \ \ \ \ V_{ai} = X_{a}^{\ j} \left(W_{V}\right)_{ij}
 \end{align}
-$$<p>where,</p>
-<ul>
-<li>\(\left(W_{Q}\right)_{ij}, \left(W_{K} \right)_{ij} \in  \mathbb{R}^{d_m \times d_k} \) and  $ \left(W_{V}\right)_{ij} \in  \mathbb{R}^{d_m \times d_v}$</li>
-<li>$X_{ai} = \Xi\left( I\right) \in \mathbb{R}^{N \times d_m}$, where $I_{ai} \in \mathbb{R}^{N \times d_{\text{input}}}$ is the input signal and $\Xi$ is an embedding function.</li>
-</ul>
-<p>Okay so that notation looks pretty busy 😵‍💫, but things appear to be more explicit.</p>
-<p>Going to multi-head attention is simple,</p>
+$$
+
+where,
+
+- \(\left(W_{Q}\right)_{ij}, \left(W_{K} \right)_{ij} \in  \mathbb{R}^{d_m \times d_k} \) and  $ \left(W_{V}\right)_{ij} \in  \mathbb{R}^{d_m \times d_v}$
+- $X_{ai} = \Xi\left( I\right) \in \mathbb{R}^{N \times d_m}$, where $I_{ai} \in \mathbb{R}^{N \times d_{\text{input}}}$ is the input signal and $\Xi$ is an embedding function.
+
+Okay so that notation looks pretty busy 😵‍💫, but things appear to be more explicit. 
+
+Going to multi-head attention is simple,
+
 $$
 \newcommand{\Q}{Q}
 \newcommand{\K}{K}
@@ -276,15 +388,113 @@ $$
 \begin{align}
     \text{MultiHead}(\Q, \K, \V)_{ai} =\left(W_O \right)^{\mu j}_{\ \ \ \ i} \  \text{Attention}(Q,K,V)_{\mu aj}
 \end{align}
-$$<p>where $(W_O)_{\mu j i} \in \mathbb{R}^{h \times d_v \times d_m}$ and $h$ is the number of heads. Here the extra index, $\mu$ runs over different heads of self attention. The attention for each head is given by,</p>
+$$
+
+where $(W_O)_{\mu j i} \in \mathbb{R}^{h \times d_v \times d_m}$ and $h$ is the number of heads. Here the extra index, $\mu$ runs over different heads of self attention. The attention for each head is given by,
+
 $$
 \begin{equation}
     \text{Attention}(Q, K, V)_{\mu a i} = \text{softmax} \left( \frac{Q_{\mu a j} K_{\mu b}^{\ \ \ \ j}}{\sqrt{d_k}} \right) V^{\ b}_{\mu \ \ i}
+    \label{eq:multiattn}
 \end{equation}
-$$<p>Note here, that although $\mu$ is repeated it is a label and a free index on the LHS.</p>
-<p>I am going to abuse notation more; consider a tensor $A_{\mu a i j} \in \mathbb{R}^{n \times m \times p \times q}$ then $A_{\mu |ai,j|} \in \mathbb{R}^{n \times m p \times q}$, which is to be interpreted as a batch of matrices. These type of index fusions will help us keep track of large matrices that are GPU friendly.</p>
-<h3 id="pytorch-implementation">PyTorch implementation</h3>
+$$
 
+Note here, that although $\mu$ is repeated it is a label and a free index on the LHS. -->
+<!-- 
+There is one other detail; we should only have attention scores to previous tokens, we can achieve this by,
+
+$$
+\begin{equation}
+    \text{softmax} \left( \frac{Q_{\mu a j} K_{\mu b}^{\ \ \ \ j}}{\sqrt{d_k}} + M_{\mu a b}\right) 
+\end{equation}
+$$
+
+where;
+
+$$
+\begin{equation}
+    M_{\mu a b} = 
+            \begin{cases}
+                0, & \text{if } b \leq a \\
+                -\infty, & \text{if } b \gt a 
+            \end{cases}
+\end{equation}
+$$
+ -->
+<h3 id="pytorch-implementation">PyTorch implementation</h3>
+<p>Below is a simple PyTorch implementation;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="ln"> 1</span><span class="cl"><span class="kn">import</span> <span class="nn">torch</span>
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl"><span class="kn">from</span> <span class="nn">torch</span> <span class="kn">import</span> <span class="n">nn</span>
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl"><span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl"><span class="k">class</span> <span class="nc">SelfAttention</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dm</span><span class="p">,</span> <span class="n">dk</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">h</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">        <span class="nb">super</span><span class="p">(</span><span class="n">SelfAttention</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">dm</span> <span class="o">=</span> <span class="n">dm</span>    <span class="c1"># Model dimension</span>
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">dk</span> <span class="o">=</span> <span class="n">dk</span>    <span class="c1"># Key/Query dimension per head</span>
+</span></span><span class="line"><span class="ln">10</span><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">=</span> <span class="n">h</span>      <span class="c1"># Number of heads</span>
+</span></span><span class="line"><span class="ln">11</span><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">N</span> <span class="o">=</span> <span class="n">N</span>      <span class="c1"># Sequence length</span>
+</span></span><span class="line"><span class="ln">12</span><span class="cl">
+</span></span><span class="line"><span class="ln">13</span><span class="cl">        <span class="c1"># Linear layer to project input into Q, K, V</span>
+</span></span><span class="line"><span class="ln">14</span><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">Wqkv</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">dm</span><span class="p">,</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">dk</span> <span class="o">*</span> <span class="n">h</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">15</span><span class="cl">        
+</span></span><span class="line"><span class="ln">16</span><span class="cl">        <span class="c1"># Final linear layer to project concatenated heads back to dm</span>
+</span></span><span class="line"><span class="ln">17</span><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">final</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="n">h</span> <span class="o">*</span> <span class="n">dk</span><span class="p">,</span> <span class="n">dm</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">18</span><span class="cl">
+</span></span><span class="line"><span class="ln">19</span><span class="cl">        <span class="c1"># Causal mask to prevent attention to future tokens</span>
+</span></span><span class="line"><span class="ln">20</span><span class="cl">        <span class="bp">self</span><span class="o">.</span><span class="n">register_buffer</span><span class="p">(</span><span class="s2">&#34;causal_mask&#34;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_causal_mask</span><span class="p">(</span><span class="n">N</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln">21</span><span class="cl">
+</span></span><span class="line"><span class="ln">22</span><span class="cl">        <span class="c1"># Weight initialization (similar to GPT-2)</span>
+</span></span><span class="line"><span class="ln">23</span><span class="cl">        <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">normal_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Wqkv</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">24</span><span class="cl">        <span class="n">nn</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">normal_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">final</span><span class="o">.</span><span class="n">weight</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">std</span><span class="o">=</span><span class="mf">0.02</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">25</span><span class="cl">
+</span></span><span class="line"><span class="ln">26</span><span class="cl">    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+</span></span><span class="line"><span class="ln">27</span><span class="cl">        <span class="n">B</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span>  <span class="c1"># Batch size, Sequence length, Model dimension</span>
+</span></span><span class="line"><span class="ln">28</span><span class="cl">
+</span></span><span class="line"><span class="ln">29</span><span class="cl">        <span class="c1"># Linear projection to obtain Q, K, V</span>
+</span></span><span class="line"><span class="ln">30</span><span class="cl">        <span class="n">QKV</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Wqkv</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">31</span><span class="cl">        <span class="n">Q</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">QKV</span><span class="p">,</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dk</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">32</span><span class="cl">
+</span></span><span class="line"><span class="ln">33</span><span class="cl">        <span class="c1"># Reshape Q, K, V to [B, h, N, dk]</span>
+</span></span><span class="line"><span class="ln">34</span><span class="cl">        <span class="n">Q</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">V</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">reshape</span><span class="p">,</span> <span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">K</span><span class="p">,</span> <span class="n">V</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln">35</span><span class="cl">
+</span></span><span class="line"><span class="ln">36</span><span class="cl">        <span class="c1"># Scaled dot-product attention</span>
+</span></span><span class="line"><span class="ln">37</span><span class="cl">        <span class="n">attn_scores</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">Q</span><span class="p">,</span> <span class="n">K</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dk</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">38</span><span class="cl">
+</span></span><span class="line"><span class="ln">39</span><span class="cl">        <span class="c1"># Apply causal mask</span>
+</span></span><span class="line"><span class="ln">40</span><span class="cl">        <span class="n">attn_scores</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">causal_mask</span><span class="p">[:</span><span class="n">N</span><span class="p">,</span> <span class="p">:</span><span class="n">N</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">attn_scores</span><span class="o">.</span><span class="n">device</span><span class="p">)[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
+</span></span><span class="line"><span class="ln">41</span><span class="cl">
+</span></span><span class="line"><span class="ln">42</span><span class="cl">        <span class="c1"># Apply external mask if provided (optional)</span>
+</span></span><span class="line"><span class="ln">43</span><span class="cl">        <span class="k">if</span> <span class="n">mask</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span></span><span class="line"><span class="ln">44</span><span class="cl">            <span class="n">attn_scores</span> <span class="o">+=</span> <span class="n">mask</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">masked_fill</span><span class="p">(</span><span class="n">mask</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">))</span>
+</span></span><span class="line"><span class="ln">45</span><span class="cl">
+</span></span><span class="line"><span class="ln">46</span><span class="cl">        <span class="c1"># Softmax to obtain attention weights</span>
+</span></span><span class="line"><span class="ln">47</span><span class="cl">        <span class="n">attn_weights</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">attn_scores</span><span class="p">,</span> <span class="n">dim</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">48</span><span class="cl">
+</span></span><span class="line"><span class="ln">49</span><span class="cl">        <span class="c1"># Attention output</span>
+</span></span><span class="line"><span class="ln">50</span><span class="cl">        <span class="n">attn_output</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">attn_weights</span><span class="p">,</span> <span class="n">V</span><span class="p">)</span>  <span class="c1"># [B, h, N, dk]</span>
+</span></span><span class="line"><span class="ln">51</span><span class="cl">
+</span></span><span class="line"><span class="ln">52</span><span class="cl">        <span class="c1"># Concatenate heads and project back to dm</span>
+</span></span><span class="line"><span class="ln">53</span><span class="cl">        <span class="n">attn_output</span> <span class="o">=</span> <span class="n">attn_output</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">dk</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">54</span><span class="cl">        <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">final</span><span class="p">(</span><span class="n">attn_output</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">55</span><span class="cl">
+</span></span><span class="line"><span class="ln">56</span><span class="cl">        <span class="k">return</span> <span class="n">output</span><span class="p">,</span> <span class="n">attn_weights</span>
+</span></span><span class="line"><span class="ln">57</span><span class="cl">
+</span></span><span class="line"><span class="ln">58</span><span class="cl">    <span class="k">def</span> <span class="nf">reshape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">A</span><span class="p">):</span>
+</span></span><span class="line"><span class="ln">59</span><span class="cl">        <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="ln">60</span><span class="cl"><span class="s2">        Reshape input from [B, N, h * dk] to [B, h, N, dk].
+</span></span></span><span class="line"><span class="ln">61</span><span class="cl"><span class="s2">        &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="ln">62</span><span class="cl">        <span class="n">B</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">A</span><span class="o">.</span><span class="n">shape</span>
+</span></span><span class="line"><span class="ln">63</span><span class="cl">        <span class="k">return</span> <span class="n">A</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">h</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">dk</span><span class="p">)</span><span class="o">.</span><span class="n">permute</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">64</span><span class="cl">
+</span></span><span class="line"><span class="ln">65</span><span class="cl">    <span class="k">def</span> <span class="nf">create_causal_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">N</span><span class="p">):</span>
+</span></span><span class="line"><span class="ln">66</span><span class="cl">        <span class="s2">&#34;&#34;&#34;
+</span></span></span><span class="line"><span class="ln">67</span><span class="cl"><span class="s2">        Creates a causal mask to prevent attention to future tokens.
+</span></span></span><span class="line"><span class="ln">68</span><span class="cl"><span class="s2">        Shape: [N, N] with -inf in the upper triangle (excluding diagonal).
+</span></span></span><span class="line"><span class="ln">69</span><span class="cl"><span class="s2">        &#34;&#34;&#34;</span>
+</span></span><span class="line"><span class="ln">70</span><span class="cl">        <span class="n">mask</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">full</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="n">N</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">)),</span> <span class="n">diagonal</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="ln">71</span><span class="cl">        <span class="k">return</span> <span class="n">mask</span>
+</span></span></code></pre></div>
             </div>
         </article></main>
 </div>
