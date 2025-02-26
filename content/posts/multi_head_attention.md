@@ -171,7 +171,7 @@ which is a 2d matrix multiplication :sunglasses:. Although, now I have to split 
 
 #### An illustration
 Below is an illustration of all the mathematics shown above, the flow is from bottom to up. Note that there is no mask in this illustration, however, it is a straight forward extension.
-{{< figure src="/images/attention/attention.png" width="600em">}}
+{{< figure src="/images/attention/attention_down.png" width="600em">}}
 
 
 
